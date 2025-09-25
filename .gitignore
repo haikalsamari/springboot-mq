@@ -34,7 +34,4 @@ build/
 
 ### Envs ###
 .env
-
-# Google credentials
-src/main/resources/credentials.json
 src/main/resources/credential.json
