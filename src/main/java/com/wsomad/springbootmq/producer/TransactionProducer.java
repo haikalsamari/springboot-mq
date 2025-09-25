@@ -13,6 +13,6 @@ public class TransactionProducer {
 
     public void sendTransactionEvent(String message) {
         amqpTemplate.convertAndSend("transaction-exchange", "", message);
-        System.out.println("Sent: " + message);
+        System.out.println("Message sent: " + message);
     }
 }

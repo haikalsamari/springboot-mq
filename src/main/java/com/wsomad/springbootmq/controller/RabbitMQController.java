@@ -1,8 +1,6 @@
 package com.wsomad.springbootmq.controller;
 
-import com.wsomad.springbootmq.producer.MessageProducer;
 import com.wsomad.springbootmq.producer.TransactionProducer;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

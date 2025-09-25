@@ -9,14 +9,23 @@ import org.springframework.amqp.core.Queue;
 
 @Configuration
 public class RabbitMQConfig {
+    public static final String FANOUT_EXCHANGE = "transaction-exchange";
+    public static final String EMAIL_QUEUE = "email-queue";
+    public static final String SHEET_QUEUE = "sheet-queue";
+
     @Bean
     public FanoutExchange fanoutExchange() {
-        return new FanoutExchange("transaction-exchange");
+        return new FanoutExchange(FANOUT_EXCHANGE);
     }
 
     @Bean
     public Queue emailQueue() {
-        return new Queue("email-queue", false);
+        return new Queue(EMAIL_QUEUE, false);
+    }
+
+    @Bean
+    public static Queue sheetQueue() {
+        return new Queue(SHEET_QUEUE, false);
     }
 
     @Bean
@@ -42,5 +51,10 @@ public class RabbitMQConfig {
     @Bean
     public Binding bindingCalendar(FanoutExchange fanoutExchange, Queue calendarQueue) {
         return BindingBuilder.bind(calendarQueue).to(fanoutExchange);
+    }
+
+    @Bean
+    public Binding sheetBinding(Queue sheetQueue, FanoutExchange fanoutExchange) {
+        return BindingBuilder.bind(sheetQueue).to(fanoutExchange);
     }
 }
